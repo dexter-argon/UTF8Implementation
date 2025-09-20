@@ -20,10 +20,10 @@ public class UTF8EdgeCasesTest {
         assertEquals(1, emoji.codePointCount(0, emoji.length())); // But only 1 code point
 
         // Test proper handling of surrogate pairs
-        byte[] encoded = encodeStringToUTF8(emoji);
+        byte[] encoded = UTF8Implementation.encodeStringToUTF8(emoji);
         assertEquals(4, encoded.length); // Should be 4 bytes in UTF-8
 
-        String decoded = decodeUTF8ToString(encoded);
+        String decoded = UTF8Implementation.decodeUTF8ToString(encoded);
         assertEquals(emoji, decoded);
     }
 
@@ -36,7 +36,7 @@ public class UTF8EdgeCasesTest {
 
         // These should either be rejected or handled with replacement characters
         assertThrows(IllegalArgumentException.class, () ->
-            encodeCharToUTF8(highSurrogate));
+                encodeCharToUTF8(highSurrogate));
 
         assertThrows(IllegalArgumentException.class, () ->
             encodeCharToUTF8(lowSurrogate));
@@ -159,35 +159,28 @@ public class UTF8EdgeCasesTest {
         return sb.toString().trim();
     }
 
-    // Methods to implement:
 
     private byte[] encodeStringToUTF8(String str) {
-        // TODO: Implement string to UTF-8 encoding
-        throw new UnsupportedOperationException("Implement this method");
+        return UTF8Implementation.encodeStringToUTF8(str);
     }
 
     private String decodeUTF8ToString(byte[] bytes) {
-        // TODO: Implement UTF-8 to string decoding
-        throw new UnsupportedOperationException("Implement this method");
+        return UTF8Implementation.decodeUTF8ToString(bytes);
     }
 
     private byte[] encodeCharToUTF8(char c) {
-        // TODO: Implement character to UTF-8 encoding
-        throw new UnsupportedOperationException("Implement this method");
+        return encodeCodePointToUTF8((int) c);
     }
 
     private byte[] encodeCodePointToUTF8(int codePoint) {
-        // TODO: Implement code point to UTF-8 encoding
-        throw new UnsupportedOperationException("Implement this method");
+        return UTF8Implementation.encodeCodePointToUTF8(codePoint);
     }
 
     private int decodeUTF8ToCodePoint(byte[] bytes, int offset) {
-        // TODO: Implement UTF-8 to code point decoding
-        throw new UnsupportedOperationException("Implement this method");
+        return UTF8Implementation.decodeUTF8ToCodePoint(bytes, offset);
     }
 
     private boolean isValidUTF8(byte[] bytes) {
-        // TODO: Implement UTF-8 validation
-        throw new UnsupportedOperationException("Implement this method");
+        return UTF8Implementation.isValidUTF8(bytes);
     }
 }

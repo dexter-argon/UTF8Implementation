@@ -2,10 +2,12 @@ package com.utf8;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UTF8EncodingTest {
 
+    UTF8Implementation utf8 = new UTF8Implementation();
     @Test
     @DisplayName("Test ASCII characters (1-byte UTF-8)")
     public void testASCIICharacters() {
@@ -33,7 +35,7 @@ public class UTF8EncodingTest {
 
         // Test actual byte encoding
         assertArrayEquals(new byte[]{(byte)0xC3, (byte)0xB1}, encodeCharToUTF8('ñ')); // ñ
-        assertArrayEquals(new byte[]{(byte)0xC3, (byte)0xA9}, encodeCharToUTF8('©')); // ©
+        assertArrayEquals(new byte[]{(byte)0xC2, (byte)0xA9}, encodeCharToUTF8('©')); // ©
     }
 
     @Test
@@ -77,8 +79,8 @@ public class UTF8EncodingTest {
         };
 
         for (String original : testStrings) {
-            byte[] encoded = encodeStringToUTF8(original);
-            String decoded = decodeUTF8ToString(encoded);
+            byte[] encoded = UTF8Implementation.encodeStringToUTF8(original);
+            String decoded = UTF8Implementation.decodeUTF8ToString(encoded);
             assertEquals(original, decoded, "Failed for string: " + original);
         }
     }
@@ -140,56 +142,41 @@ public class UTF8EncodingTest {
      * Returns the number of bytes required to encode the given code point in UTF-8
      */
     private int getUTF8ByteLength(int codePoint) {
-        // TODO: Implement this method
-        // Hint: UTF-8 encoding rules:
-        // - 0x0000-0x007F: 1 byte
-        // - 0x0080-0x07FF: 2 bytes
-        // - 0x0800-0xFFFF: 3 bytes
-        // - 0x10000-0x10FFFF: 4 bytes
-        throw new UnsupportedOperationException("Implement this method");
+        return UTF8Implementation.getUTF8ByteLength(codePoint);
     }
 
     /**
      * Encodes a single character to UTF-8 bytes
      */
     private byte[] encodeCharToUTF8(char c) {
-        // TODO: Implement this method
-        throw new UnsupportedOperationException("Implement this method");
+        return encodeCodePointToUTF8((int) c);
     }
 
     /**
      * Encodes a code point to UTF-8 bytes
      */
     private byte[] encodeCodePointToUTF8(int codePoint) {
-        // TODO: Implement this method
-        // Hint: You'll need to handle the bit manipulation for UTF-8 encoding
-        throw new UnsupportedOperationException("Implement this method");
+        return UTF8Implementation.encodeCodePointToUTF8(codePoint);
     }
 
     /**
      * Encodes a string to UTF-8 bytes
      */
     private byte[] encodeStringToUTF8(String str) {
-        // TODO: Implement this method
-        // Hint: Process each code point in the string
-        throw new UnsupportedOperationException("Implement this method");
+        return UTF8Implementation.encodeStringToUTF8(str);
     }
 
     /**
      * Decodes UTF-8 bytes back to a string
      */
     private String decodeUTF8ToString(byte[] bytes) {
-        // TODO: Implement this method
-        // Hint: You'll need to parse the UTF-8 byte sequences
-        throw new UnsupportedOperationException("Implement this method");
+        return UTF8Implementation.decodeUTF8ToString(bytes);
     }
 
     /**
      * Validates if a byte array contains valid UTF-8 sequences
      */
     private boolean isValidUTF8(byte[] bytes) {
-        // TODO: Implement this method
-        // Hint: Check for proper UTF-8 sequence patterns
-        throw new UnsupportedOperationException("Implement this method");
+        return UTF8Implementation.isValidUTF8(bytes);
     }
 }

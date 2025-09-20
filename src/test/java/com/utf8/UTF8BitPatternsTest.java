@@ -136,34 +136,27 @@ public class UTF8BitPatternsTest {
      * Encode a single character to UTF-8 bytes
      */
     private byte[] encodeToUTF8(char c) {
-        // TODO: Implement UTF-8 encoding for a character
-        throw new UnsupportedOperationException("Implement this method");
+        return encodeCodePointToUTF8((int) c);
     }
 
     /**
      * Encode a code point to UTF-8 bytes
      */
     private byte[] encodeCodePointToUTF8(int codePoint) {
-        // TODO: Implement UTF-8 encoding for a code point
-        // Handle 1-4 byte sequences based on code point value
-        throw new UnsupportedOperationException("Implement this method");
+        return UTF8Implementation.encodeCodePointToUTF8(codePoint);
     }
 
     /**
      * Decode UTF-8 bytes starting at offset to a code point
      */
     private int decodeUTF8ToCodePoint(byte[] bytes, int offset) {
-        // TODO: Implement UTF-8 decoding to get code point
-        // Parse the bit patterns to reconstruct the original code point
-        throw new UnsupportedOperationException("Implement this method");
+        return UTF8Implementation.decodeUTF8ToCodePoint(bytes, offset);
     }
 
     /**
      * Validate if bytes form a valid UTF-8 sequence
      */
     private boolean isValidUTF8Sequence(byte[] bytes) {
-        // TODO: Implement UTF-8 validation
-        // Check for proper bit patterns and reject overlong encodings
-        throw new UnsupportedOperationException("Implement this method");
+        return UTF8Implementation.isValidUTF8(bytes);
     }
 }
